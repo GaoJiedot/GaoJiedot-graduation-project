@@ -6,4 +6,6 @@ import com.gj.pojo.dto.UserDto;
 
 public interface IUserService  {
     User add(UserDto user);
+
+    User getUser(Integer userId);
 }

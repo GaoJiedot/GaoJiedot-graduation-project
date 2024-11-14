@@ -16,9 +16,14 @@ public class UserController {
     IUserService userService;
 
     @PostMapping
-    public ResponseMessage<User> add(@RequestBody UserDto user) {
+    public ResponseMessage add(@RequestBody UserDto user) {
         User userNew = userService.add(user);
         return ResponseMessage.success(userNew);
     }
 
+    @GetMapping("/{userId}")
+    public ResponseMessage get(@PathVariable Integer userId) {
+        User userNew = userService.getUser(userId);
+        return ResponseMessage.success(userNew);
+    }
 }
