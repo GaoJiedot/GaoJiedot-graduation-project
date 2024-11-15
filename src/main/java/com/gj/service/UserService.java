@@ -21,9 +21,7 @@ public class    UserService implements IUserService {
 
     @Override
     public User getUser(Integer userId) {
-       return userRepository.findById(userId).orElseThrow( ()->{
-            throw new IllegalArgumentException("用户不存在");
-        });
+       return userRepository.findById(userId).orElseThrow( ()-> new IllegalArgumentException("用户不存在"));
     }
 
     @Override
