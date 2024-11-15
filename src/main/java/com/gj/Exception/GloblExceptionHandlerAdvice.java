@@ -1,7 +1,7 @@
 package com.gj.Exception;
 
 
-import com.gj.pojo.ResponseMessage;
+import com.gj.pojo.responseMessage.ResponseMessage;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;

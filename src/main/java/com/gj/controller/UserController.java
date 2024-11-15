@@ -1,7 +1,7 @@
 package com.gj.controller;
 
 import com.gj.pojo.User;
-import com.gj.pojo.ResponseMessage;
+import com.gj.pojo.responseMessage.ResponseMessage;
 import com.gj.pojo.dto.UserDto;
 
 

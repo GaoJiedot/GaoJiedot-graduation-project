@@ -2,12 +2,10 @@ package com.gj.service;
 
 import com.gj.pojo.Shop;
 import com.gj.pojo.dto.ShopDto;
-
 import com.gj.repository.ShopRepository;
 import com.gj.service.iservice.IShopService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,7 +23,7 @@ public class ShopService implements IShopService {
 
     @Override
     public Shop get(Integer shopId) {
-        return shopRepository.findById(shopId).orElseThrow( ()-> new IllegalArgumentException("用户不存在"));
+        return shopRepository.findById(shopId).orElseThrow( ()-> new IllegalArgumentException("店铺不存在"));
     }
 
     @Override

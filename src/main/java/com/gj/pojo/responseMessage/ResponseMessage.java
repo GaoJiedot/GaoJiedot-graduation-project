@@ -1,4 +1,4 @@
-package com.gj.pojo;
+package com.gj.pojo.responseMessage;
 
 import org.springframework.http.HttpStatus;
 
