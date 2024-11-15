@@ -7,8 +7,11 @@ import com.gj.service.iservice.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/order")
+@CrossOrigin(origins = "*")
 public class OrderController {
     @Autowired
     IOrderService orderService;
@@ -20,9 +23,15 @@ public class OrderController {
     }
     @GetMapping("/{orderId}")
     public ResponseMessage get(@PathVariable("orderId") Integer orderId) {
-        Order order = orderService.get(orderId);
-        return  ResponseMessage.success(order);
+        Order orderNew = orderService.get(orderId);
+        return  ResponseMessage.success(orderNew);
     }
+    @GetMapping("/type/{orderType}")
+    public ResponseMessage getType(@PathVariable("orderType") Integer orderType) {
+        List<Order> orderNew = orderService.getType(orderType);
+        return  ResponseMessage.success(orderNew);
+    }
+
     @PutMapping
     public ResponseMessage update(@RequestBody OrderDto order) {
         Order orderNew = orderService.update(order);

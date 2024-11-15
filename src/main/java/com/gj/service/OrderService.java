@@ -8,6 +8,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OrderService implements IOrderService {
     @Autowired
@@ -36,4 +38,10 @@ public class OrderService implements IOrderService {
     public void delete(Integer orderId) {
         orderRepository.deleteById(orderId);
     }
+
+    @Override
+    public List<Order> getType(Integer orderType) {
+        return (List<Order>) orderRepository.findByOrderType(orderType);
+    }
+
 }

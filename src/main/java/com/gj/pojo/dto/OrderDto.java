@@ -9,4 +9,5 @@ public class OrderDto {
     private Integer orderPrice;
     private Integer orderStatus;
     private String orderTabs;
+    private Integer orderType;
 }

@@ -1,6 +1,9 @@
 package com.gj.pojo.responseMessage;
 
+import com.gj.pojo.Order;
 import org.springframework.http.HttpStatus;
+
+import java.util.List;
 
 
 public class ResponseMessage<T> {
@@ -19,6 +22,10 @@ public class ResponseMessage<T> {
     }
     public static <T> ResponseMessage<T> success() {
         return new ResponseMessage<>(HttpStatus.OK.value(), "success", null);
+    }
+    public static ResponseMessage success(List<Order> data) {
+        // 创建并返回包含列表的响应消息
+        return new ResponseMessage(HttpStatus.OK.value(), "success", data);
     }
 
     public Integer getCode() {
