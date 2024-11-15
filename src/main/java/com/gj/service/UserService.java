@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService implements IUserService {
+public class    UserService implements IUserService {
     @Autowired
     UserRepository userRepository;
     @Override
@@ -24,5 +24,18 @@ public class UserService implements IUserService {
        return userRepository.findById(userId).orElseThrow( ()->{
             throw new IllegalArgumentException("用户不存在");
         });
+    }
+
+    @Override
+    public User update(UserDto user) {
+        User userPojo = new User();
+        BeanUtils.copyProperties(user,userPojo);
+        return userRepository.save(userPojo);
+    }
+
+    @Override
+    public void delete(Integer userId) {
+        userRepository.deleteById(userId);
+
     }
 }

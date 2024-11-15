@@ -1,11 +1,9 @@
 package com.gj.pojo.dto;
 
-import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 
-
-public class ResponseMessage <T>{
+public class ResponseMessage<T> {
     private Integer code;
     private String message;
     private T data;
@@ -15,8 +13,12 @@ public class ResponseMessage <T>{
         this.message = message;
         this.data = data;
     }
-    public static <T>ResponseMessage <T> success(T data){
-        return new ResponseMessage<>(HttpStatus.OK.value(), "success",data);
+
+    public static <T> ResponseMessage<T> success(T data) {
+        return new ResponseMessage<>(HttpStatus.OK.value(), "success", data);
+    }
+    public static <T> ResponseMessage<T> success() {
+        return new ResponseMessage<>(HttpStatus.OK.value(), "success", null);
     }
 
     public Integer getCode() {
