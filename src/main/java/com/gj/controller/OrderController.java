@@ -22,13 +22,13 @@ public class OrderController {
         return  ResponseMessage.success(orderNew);
     }
     @GetMapping("/{orderId}")
-    public ResponseMessage get(@PathVariable("orderId") Integer orderId) {
+    public ResponseMessage get(@PathVariable Integer orderId) {
         Order orderNew = orderService.get(orderId);
         return  ResponseMessage.success(orderNew);
     }
-    @GetMapping("/type/{orderType}")
-    public ResponseMessage getType(@PathVariable("orderType") Integer orderType) {
-        List<Order> orderNew = orderService.getType(orderType);
+    @GetMapping("/status/{orderStatus}")
+    public ResponseMessage getorderStatus(@PathVariable Integer orderStatus) {
+        List<Order> orderNew = orderService.getStatus(orderStatus);
         return  ResponseMessage.success(orderNew);
     }
 
@@ -38,7 +38,7 @@ public class OrderController {
         return  ResponseMessage.success(orderNew);
     }
     @DeleteMapping("/{orderId}")
-    public ResponseMessage delete(@PathVariable("orderId") Integer orderId) {
+    public ResponseMessage delete(@PathVariable Integer orderId) {
         orderService.delete(orderId);
         return ResponseMessage.success();
     }

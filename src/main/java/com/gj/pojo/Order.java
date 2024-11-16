@@ -18,8 +18,7 @@ public class Order {
     private Integer orderStatus;
     @Column(name = "order_tabs")
     private String orderTabs;
-    @Column(name = "order_type")
-    private Integer orderType;
+
 
 
 }

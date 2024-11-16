@@ -14,5 +14,7 @@ public interface IOrderService {
 
     void delete(Integer orderId);
 
-    List<Order> getType(Integer orderType);
+
+
+    List<Order> getStatus(Integer orderStatus);
 }

@@ -40,8 +40,8 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public List<Order> getType(Integer orderType) {
-        return (List<Order>) orderRepository.findByOrderType(orderType);
+    public List<Order> getStatus(Integer orderStatus) {
+        return (List<Order>) orderRepository.findByOrderStatus(orderStatus);
     }
 
 }

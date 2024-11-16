@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseMessage get(@PathVariable Integer userId) {
+    public ResponseMessage get(@PathVariable("userId") Integer userId) {
         User userNew = userService.getUser(userId);
         return ResponseMessage.success(userNew);
     }
