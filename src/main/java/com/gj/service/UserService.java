@@ -9,25 +9,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class    UserService implements IUserService {
+public class UserService implements IUserService {
     @Autowired
     UserRepository userRepository;
+
     @Override
     public User add(UserDto user) {
         User userPojo = new User();
-        BeanUtils.copyProperties(user,userPojo);
+        BeanUtils.copyProperties(user, userPojo);
         return userRepository.save(userPojo);
     }
 
     @Override
-    public User getUser(Integer userId) {
-       return userRepository.findById(userId).orElseThrow( ()-> new IllegalArgumentException("用户不存在"));
+    public User getUser(String userName) {
+        return userRepository.findByUserName(userName);
     }
+
 
     @Override
     public User update(UserDto user) {
         User userPojo = new User();
-        BeanUtils.copyProperties(user,userPojo);
+        BeanUtils.copyProperties(user, userPojo);
         return userRepository.save(userPojo);
     }
 
@@ -36,4 +38,6 @@ public class    UserService implements IUserService {
         userRepository.deleteById(userId);
 
     }
+
+
 }

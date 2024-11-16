@@ -22,10 +22,14 @@ public class UserController {
         return ResponseMessage.success(userNew);
     }
 
-    @GetMapping("/{userId}")
-    public ResponseMessage get(@PathVariable("userId") Integer userId) {
-        User userNew = userService.getUser(userId);
-        return ResponseMessage.success(userNew);
+    @GetMapping("/username/{userName}")
+    public ResponseMessage get(@PathVariable String userName) {
+        User userNew = userService.getUser(userName);
+        if (userNew != null) {
+            return ResponseMessage.success(userNew);
+        } else {
+            return ResponseMessage.error();
+        }
     }
     @PutMapping
     public ResponseMessage update(@RequestBody UserDto user) {

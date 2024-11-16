@@ -20,12 +20,17 @@ public class ResponseMessage<T> {
     public static <T> ResponseMessage<T> success(T data) {
         return new ResponseMessage<>(HttpStatus.OK.value(), "success", data);
     }
+
     public static <T> ResponseMessage<T> success() {
-        return new ResponseMessage<>(HttpStatus.OK.value(), "success", null);
+        return new ResponseMessage<>(500, "success", null);
     }
-    public static ResponseMessage success(List<Order> data) {
-        // 创建并返回包含列表的响应消息
+
+    public static <T> ResponseMessage<T> success(List<Order> data) {
         return new ResponseMessage(HttpStatus.OK.value(), "success", data);
+    }
+
+    public static <T> ResponseMessage<T> error() {
+        return new ResponseMessage<>(500, "error", null);
     }
 
     public Integer getCode() {

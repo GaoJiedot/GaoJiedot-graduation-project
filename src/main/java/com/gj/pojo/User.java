@@ -17,7 +17,7 @@ public class User {
     private String password;
     @Column(name = "user_type")
     private Integer userType;
-    @Column(name = "user_email")
+    @Column(name = "email")
     private String email;
 
 
