@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tabulate")
-@CrossOrigin(origins = "*")
+
 public class TabulateController {
     @Autowired
     ITabulateService tabulateService;
@@ -39,6 +39,6 @@ public class TabulateController {
     @DeleteMapping("/{tabulateId}")
     public ResponseMessage delete(@PathVariable Integer tabulateId) {
         tabulateService.delete(tabulateId);
-        return ResponseMessage.success();
+        return ResponseMessage.success("删除成功");
     }
 }

@@ -13,4 +13,8 @@ public interface IUserService  {
 
     void delete(Integer userId);
 
+
+    User login(UserDto user);
+
+    User updatePassword(UserDto user);
 }

@@ -20,6 +20,24 @@ public class UserService implements IUserService {
         return userRepository.save(userPojo);
     }
 
+    public User login(UserDto user) {
+        User existingUser = userRepository.findByUserName(user.getUserName());
+        if (existingUser != null && existingUser.getPassword().equals(user.getPassword())) {
+            return existingUser;
+        }
+        return null;
+    }
+
+    @Override
+    public User updatePassword(UserDto user) {
+        User existingUser = userRepository.findByUserName(user.getUserName());
+        if (existingUser != null) {
+            existingUser.setPassword(user.getPassword());
+            return userRepository.save(existingUser);
+        }
+            return null;
+    }
+
     @Override
     public User getUser(String userName) {
         return userRepository.findByUserName(userName);

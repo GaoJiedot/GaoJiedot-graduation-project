@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/order")
-@CrossOrigin(origins = "*")
+
 public class OrderController {
     @Autowired
     IOrderService orderService;
@@ -40,6 +40,6 @@ public class OrderController {
     @DeleteMapping("/{orderId}")
     public ResponseMessage delete(@PathVariable Integer orderId) {
         orderService.delete(orderId);
-        return ResponseMessage.success();
+        return ResponseMessage.success("删除成功");
     }
 }

@@ -21,17 +21,18 @@ public class ResponseMessage<T> {
         return new ResponseMessage<>(HttpStatus.OK.value(), "success", data);
     }
 
-    public static <T> ResponseMessage<T> success() {
-        return new ResponseMessage<>(500, "success", null);
+    public static <T> ResponseMessage<T> success(String message) {
+        return new ResponseMessage<>(HttpStatus.OK.value(), message, null);
     }
 
     public static <T> ResponseMessage<T> success(List<Order> data) {
         return new ResponseMessage(HttpStatus.OK.value(), "success", data);
     }
 
-    public static <T> ResponseMessage<T> error() {
-        return new ResponseMessage<>(500, "error", null);
+    public static <T> ResponseMessage<T> error(String message) {
+        return new ResponseMessage<>(500, message, null);
     }
+
 
     public Integer getCode() {
         return code;

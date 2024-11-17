@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/shop")
-@CrossOrigin(origins = "*")
+
 public class ShopController {
     @Autowired
     IShopService shopService;
@@ -35,7 +35,7 @@ public class ShopController {
     @DeleteMapping("/{shopId}")
     public ResponseMessage delete(@PathVariable Integer shopId) {
         shopService.delete(shopId);
-       return ResponseMessage.success();
+       return ResponseMessage.success("删除成功");
     }
 
 }
