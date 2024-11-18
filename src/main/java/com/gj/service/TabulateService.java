@@ -44,4 +44,9 @@ public class TabulateService implements ITabulateService {
         tabulateRepository.deleteById(tabulateId);
     }
 
+    @Override
+    public List<Tabulate> getByTabulateName(String tabulatName) {
+        return tabulateRepository.findByTabulateName(tabulatName);
+    }
+
 }

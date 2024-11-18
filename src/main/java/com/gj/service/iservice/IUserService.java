@@ -7,7 +7,7 @@ public interface IUserService  {
     User add(UserDto user);
 
 
-    User getUser(String userName);
+    User getUser(Long userAccount);
 
     User update(UserDto user);
 

@@ -49,9 +49,9 @@ public class UserController {
     }
 
 
-    @GetMapping("/username/{userName}")
-    public ResponseMessage get(@PathVariable String userName) {
-        User userNew = userService.getUser(userName);
+    @GetMapping("/userAccount/{userAccount}")
+    public ResponseMessage getUser(@PathVariable Long userAccount) {
+        User userNew = userService.getUser(userAccount);
         if (userNew != null) {
             return ResponseMessage.success(userNew);
         } else {

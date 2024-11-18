@@ -16,4 +16,6 @@ public interface ITabulateService {
     Tabulate update(TabulateDto tabulate);
 
     void delete(Integer tabulateId);
+
+    List<Tabulate> getByTabulateName(String tabulatName);
 }

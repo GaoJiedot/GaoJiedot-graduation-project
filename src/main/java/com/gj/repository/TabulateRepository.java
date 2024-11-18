@@ -8,7 +8,8 @@ import java.util.List;
 
 @Repository
 public interface TabulateRepository extends CrudRepository<Tabulate, Integer> {
-    List<Tabulate> findByTabulateType (Integer orderType);
+    List<Tabulate> findByTabulateType (Integer tabulateType);
+    List<Tabulate> findByTabulateName (String tabulateName);
 }
 
 

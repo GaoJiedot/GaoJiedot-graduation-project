@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends CrudRepository<Order, Integer> {
     List<Order> findByOrderStatus(Integer orderStatus);
+
 }

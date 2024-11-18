@@ -31,6 +31,12 @@ public class TabulateController {
         List<Tabulate> tabulateNew = tabulateService.getByType(tabulateType);
         return  ResponseMessage.success(tabulateNew);
     }
+
+    @GetMapping("/search/{tabulateName}")
+    public ResponseMessage getByTabulateName(@PathVariable String tabulatName) {
+        List<Tabulate> tabulateNew = tabulateService.getByTabulateName(tabulatName);
+        return  ResponseMessage.success(tabulateNew);
+    }
     @PutMapping
     public ResponseMessage update(@RequestBody TabulateDto tabulate) {
         Tabulate tabulateNew = tabulateService.update(tabulate);

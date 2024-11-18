@@ -8,19 +8,19 @@ import lombok.Data;
 @Data
 public class User {
     @Id
-    @GeneratedValue(strategy =GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Integer userId;
-    @Column(name = "user_name")
-    private String userName;
+    @Column(name = "user_account")
+    private Long userAccount;
     @Column(name = "password")
     private String password;
+    @Column(name = "user_name")
+    private String userName;
     @Column(name = "user_type")
     private Integer userType;
     @Column(name = "email")
     private String email;
-    @Column(name = "code")
-    private String code;
 
 
 }
