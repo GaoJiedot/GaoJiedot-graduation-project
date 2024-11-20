@@ -39,6 +39,13 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public User updateAvatar(Integer userId, String avatarPath) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("用户未找到"));
+        user.setUserAvatar(avatarPath);
+       return userRepository.save(user);
+    }
+
+    @Override
     public User getUser(Long userAccount) {
         return userRepository.findByUserAccount(userAccount);
     }

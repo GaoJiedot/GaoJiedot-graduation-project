@@ -8,4 +8,5 @@ public class ShopDto {
     private String shopName;
     private String shopAddress;
     private String shopPhone;
+
 }

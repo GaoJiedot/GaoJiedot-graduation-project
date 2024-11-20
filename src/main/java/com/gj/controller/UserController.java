@@ -7,6 +7,11 @@ import com.gj.service.VerificationCodeService;
 import com.gj.service.iservice.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
@@ -64,6 +69,7 @@ public class UserController {
         User userNew = userService.update(user);
         return ResponseMessage.success(userNew);
     }
+
     @PutMapping("/updatePassword")
     public ResponseMessage updatePassword(@RequestBody UserDto user) {
         User userNew = userService.updatePassword(user);
@@ -73,9 +79,35 @@ public class UserController {
         return ResponseMessage.error("");
     }
 
-    @DeleteMapping("/{userId}")
-    public ResponseMessage delete(@PathVariable Integer userId) {
-        userService.delete(userId);
-        return ResponseMessage.success("删除成功");
+    @PostMapping("/uploadAvatar/{userId}")
+    public ResponseMessage uploadAvatar(@PathVariable Integer userId, @RequestParam("file") MultipartFile file) {
+        // 动态获取项目根目录
+        String uploadDir = System.getProperty("user.dir") + "/avatar/";
+        File uploadFolder = new File(uploadDir);
+        if (!uploadFolder.exists()) {
+            uploadFolder.mkdirs(); // 创建目录
+        }
+
+        // 为文件生成唯一文件名
+        String fileName = userId + "_" + UUID.randomUUID() + "_" + file.getOriginalFilename();
+        File destination = new File(uploadDir + fileName);
+        try {
+            file.transferTo(destination); // 保存文件
+        } catch (IOException e) {
+            return ResponseMessage.error("上传失败: " + e.getMessage());
+        }
+
+        String baseUrl = "http://localhost:8080"; // 替换为你的实际服务器地址
+        String avatarPath = "/avatar/" + fileName;
+        userService.updateAvatar(userId, avatarPath); // 更新数据库
+        return ResponseMessage.uploadsuccess("上传成功",baseUrl + avatarPath);
+
     }
-}
+
+
+    @DeleteMapping("/{userId}")
+        public ResponseMessage delete (@PathVariable Integer userId){
+            userService.delete(userId);
+            return ResponseMessage.success("删除成功");
+        }
+    }

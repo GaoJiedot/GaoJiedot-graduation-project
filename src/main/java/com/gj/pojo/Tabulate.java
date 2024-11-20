@@ -1,9 +1,6 @@
 package com.gj.pojo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Table(name = "tb_tabulate")
@@ -19,5 +16,9 @@ public class Tabulate {
     private String tabulateTabs;
     @Column(name = "tabulate_type")
     private Integer tabulateType;
+
+    @ManyToOne
+    @JoinColumn(name = "shop_id")
+    private Shop shopId;
 
 }

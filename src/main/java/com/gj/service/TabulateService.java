@@ -45,8 +45,8 @@ public class TabulateService implements ITabulateService {
     }
 
     @Override
-    public List<Tabulate> getByTabulateName(String tabulatName) {
-        return tabulateRepository.findByTabulateName(tabulatName);
+    public List<Tabulate> getByTabulateName(String tabulateName) {
+        return tabulateRepository.findByTabulateName(tabulateName);
     }
 
 }

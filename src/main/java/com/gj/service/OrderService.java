@@ -41,7 +41,7 @@ public class OrderService implements IOrderService {
 
     @Override
     public List<Order> getStatus(Integer orderStatus) {
-        return (List<Order>) orderRepository.findByOrderStatus(orderStatus);
+        return  orderRepository.findByOrderStatus(orderStatus);
     }
 
 }

@@ -17,10 +17,12 @@ public class User {
     private String password;
     @Column(name = "user_name")
     private String userName;
-    @Column(name = "user_type")
+    @Column(name = "user_type" ,columnDefinition= "int default 2")
     private Integer userType;
     @Column(name = "email")
     private String email;
+    @Column(name = "user_avatar")
+    private String userAvatar;
 
 
 }

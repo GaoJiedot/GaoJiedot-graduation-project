@@ -33,8 +33,11 @@ public class TabulateController {
     }
 
     @GetMapping("/search/{tabulateName}")
-    public ResponseMessage getByTabulateName(@PathVariable String tabulatName) {
-        List<Tabulate> tabulateNew = tabulateService.getByTabulateName(tabulatName);
+    public ResponseMessage getByTabulateName(@PathVariable String tabulateName) {
+        List<Tabulate> tabulateNew = tabulateService.getByTabulateName(tabulateName);
+        if (tabulateNew == null) {
+            return ResponseMessage.error("没有找到店铺");
+        }
         return  ResponseMessage.success(tabulateNew);
     }
     @PutMapping

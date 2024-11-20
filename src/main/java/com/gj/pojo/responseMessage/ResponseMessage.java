@@ -33,6 +33,10 @@ public class ResponseMessage<T> {
         return new ResponseMessage<>(500, message, null);
     }
 
+    public static ResponseMessage uploadsuccess(String message ,String url) {
+        return  new ResponseMessage(HttpStatus.OK.value(), "success", url);
+    }
+
 
     public Integer getCode() {
         return code;

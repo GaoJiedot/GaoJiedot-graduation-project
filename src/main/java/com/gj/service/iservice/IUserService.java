@@ -17,4 +17,6 @@ public interface IUserService  {
     User login(UserDto user);
 
     User updatePassword(UserDto user);
+
+    User updateAvatar(Integer userId, String avatarPath);
 }

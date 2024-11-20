@@ -17,5 +17,5 @@ public interface ITabulateService {
 
     void delete(Integer tabulateId);
 
-    List<Tabulate> getByTabulateName(String tabulatName);
+    List<Tabulate> getByTabulateName(String tabulateName);
 }
