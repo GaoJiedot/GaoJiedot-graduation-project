@@ -11,4 +11,5 @@ public interface IShopService {
     Shop update(ShopDto shop);
 
     void delete(Integer shopId);
+    void updateShopStatus(Integer shopId, Integer shopStatus);
 }

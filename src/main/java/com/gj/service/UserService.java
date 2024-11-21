@@ -24,7 +24,9 @@ public class UserService implements IUserService {
         User existingUser = userRepository.findByUserAccount(user.getUserAccount());
         if (existingUser != null && existingUser.getPassword().equals(user.getPassword())) {
             return existingUser;
+//            String token=JwtTokenUtils.generateToken(existingUser.getUserAccount().toString());
         }
+
         return null;
     }
 

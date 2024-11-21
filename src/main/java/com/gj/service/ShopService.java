@@ -37,4 +37,13 @@ public class ShopService implements IShopService {
     public void delete(Integer shopId) {
         shopRepository.deleteById(shopId);
     }
+
+    @Override
+    public void updateShopStatus(Integer shopId, Integer shopStatus) {
+        Shop shop= shopRepository.findById(shopId).orElseThrow( ()-> new IllegalArgumentException("店铺不存在"));
+        shop.setShopStatus(shopStatus);
+        shopRepository.save(shop);
+    }
+
+
 }
