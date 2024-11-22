@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -53,6 +54,15 @@ public class UserController {
         }
     }
 
+    @GetMapping("userId/{userId}")
+    public ResponseMessage get(@PathVariable Integer userId) {
+        User userNew = userService.get(userId);
+        if (userNew != null) {
+            return ResponseMessage.success(userNew);
+        } else {
+            return ResponseMessage.error("用户不存在");
+        }
+    }
 
     @GetMapping("/userAccount/{userAccount}")
     public ResponseMessage getUser(@PathVariable Long userAccount) {
@@ -100,14 +110,21 @@ public class UserController {
         String baseUrl = "http://localhost:8080"; // 替换为你的实际服务器地址
         String avatarPath = "/avatar/" + fileName;
         userService.updateAvatar(userId, avatarPath); // 更新数据库
-        return ResponseMessage.uploadsuccess("上传成功",baseUrl + avatarPath);
+        return ResponseMessage.uploadsuccess("上传成功", baseUrl + avatarPath);
 
     }
 
 
     @DeleteMapping("/{userId}")
-        public ResponseMessage delete (@PathVariable Integer userId){
-            userService.delete(userId);
-            return ResponseMessage.success("删除成功");
-        }
+    public ResponseMessage delete(@PathVariable Integer userId) {
+        userService.delete(userId);
+        return ResponseMessage.success("删除成功");
     }
+
+    @GetMapping("/admin")
+    public ResponseMessage findall() {
+        List<User> users = userService.findAll();
+        return ResponseMessage.success(users);
+    }
+
+}

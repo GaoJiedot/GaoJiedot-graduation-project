@@ -11,5 +11,7 @@ public class ShopDto {
     private  float shopRating;
     private String shopImages;
     private String shopLogo;
+    private String shopPhone;
+    private  String shopKeeper;
     private  String shopBusinessHours;
 }

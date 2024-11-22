@@ -3,6 +3,8 @@ package com.gj.service.iservice;
 import com.gj.pojo.User;
 import com.gj.pojo.dto.UserDto;
 
+import java.util.List;
+
 public interface IUserService  {
     User add(UserDto user);
 
@@ -19,4 +21,14 @@ public interface IUserService  {
     User updatePassword(UserDto user);
 
     User updateAvatar(Integer userId, String avatarPath);
+
+    List<User> findAll();
+
+
+
+
+    User get(Integer userId);
+
+
+    User findById(Integer Id);
 }

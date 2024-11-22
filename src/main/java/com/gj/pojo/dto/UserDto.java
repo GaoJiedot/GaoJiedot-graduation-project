@@ -12,4 +12,5 @@ public class UserDto {
     private String email;
     private String userAvatar;
     private Integer shopId;
+    private String token;
 }

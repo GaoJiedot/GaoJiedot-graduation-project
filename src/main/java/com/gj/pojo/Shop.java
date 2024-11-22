@@ -27,6 +27,8 @@ public class Shop {
     private  String shopBusinessHours;
     @Column(name = "shop_status")
     private  Integer shopStatus;
+    @Column(name = "shop_keeper")
+    private  String shopKeeper;
 
 
 }

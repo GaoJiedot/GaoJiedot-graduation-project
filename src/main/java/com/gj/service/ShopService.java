@@ -8,6 +8,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ShopService implements IShopService {
     @Autowired
@@ -45,5 +47,28 @@ public class ShopService implements IShopService {
         shopRepository.save(shop);
     }
 
+    @Override
+    public List<Shop> getAll() {
+        return (List<Shop>) shopRepository.findAll();
+    }
+
+    @Override
+    public List<Shop> getShopByPhone(String shopPhone) {
+        return shopRepository.findByShopPhone(shopPhone);
+    }
+
+    @Override
+    public Shop uploadShopLogo(Integer shopId, String avatarPath) {
+        Shop shop = shopRepository.findById(shopId).orElseThrow(() -> new IllegalArgumentException("用户未找到"));
+        shop.setShopLogo(avatarPath);
+        return shopRepository.save(shop);
+    }
+
+    @Override
+    public Shop uploadShopImages(Integer shopId, String avatarPath) {
+        Shop shop = shopRepository.findById(shopId).orElseThrow(() -> new IllegalArgumentException("用户未找到"));
+        shop.setShopLogo(avatarPath);
+        return shopRepository.save(shop);
+    }
 
 }
