@@ -49,4 +49,16 @@ public class TabulateService implements ITabulateService {
         return tabulateRepository.findByTabulateName(tabulateName);
     }
 
+    @Override
+    public List<Tabulate> getByShopId(Integer shopId) {
+        return tabulateRepository.getByShopId(shopId);
+    }
+
+    @Override
+    public Tabulate uploadTabulateImages(Integer tabulateId, String avatarPath) {
+        Tabulate tabulate = tabulateRepository.findById(tabulateId).orElseThrow(() -> new IllegalArgumentException("用户未找到"));
+        tabulate.setTabulateImage(avatarPath);
+        return tabulateRepository.save(tabulate);
+    }
+
 }

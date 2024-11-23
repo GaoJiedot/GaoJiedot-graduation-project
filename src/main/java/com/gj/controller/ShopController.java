@@ -44,7 +44,7 @@ public class ShopController {
         return ResponseMessage.success(shopNew);
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseMessage update(@RequestBody ShopDto shop) {
         Shop shopNew = shopService.update(shop);
         return ResponseMessage.success(shopNew);
@@ -67,7 +67,7 @@ public class ShopController {
         shopService.delete(shopId);
         return ResponseMessage.success("删除成功");
     }
-    @PutMapping("/uploadShopLogo")
+    @PostMapping("/uploadShopLogo/{shopId}")
     public ResponseMessage uploadShopLogo(@PathVariable Integer shopId, @RequestParam("file") MultipartFile file) {
         // 动态获取项目根目录
         String uploadDir = System.getProperty("user.dir") + "/shoplogo/";
@@ -91,10 +91,10 @@ public class ShopController {
         return ResponseMessage.uploadsuccess("上传成功", baseUrl + avatarPath);
 
     }
-    @PutMapping("/uploadShopImages")
+    @PostMapping("/uploadShopImages/{shopId}")
     public ResponseMessage uploadShopImages(@PathVariable Integer shopId, @RequestParam("file") MultipartFile file) {
         // 动态获取项目根目录
-        String uploadDir = System.getProperty("user.dir") + "/ShopImages/";
+        String uploadDir = System.getProperty("user.dir") + "/shopimages/";
         File uploadFolder = new File(uploadDir);
         if (!uploadFolder.exists()) {
             uploadFolder.mkdirs(); // 创建目录
@@ -110,7 +110,7 @@ public class ShopController {
         }
 
         String baseUrl = "http://localhost:8080"; // 替换为你的实际服务器地址
-        String avatarPath = "/ShopImages/" + fileName;
+        String avatarPath = "/shopimages/" + fileName;
         shopService.uploadShopImages(shopId, avatarPath); // 更新数据库
         return ResponseMessage.uploadsuccess("上传成功", baseUrl + avatarPath);
 

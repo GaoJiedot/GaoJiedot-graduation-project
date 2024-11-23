@@ -21,5 +21,11 @@ public class WebConfigurer implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/avatar/**")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/avatar/");
+        registry.addResourceHandler("/shoplogo/**")
+                .addResourceLocations("file:" + System.getProperty("user.dir") + "/shoplogo/");
+        registry.addResourceHandler("/shopimages/**")
+                .addResourceLocations("file:" + System.getProperty("user.dir") + "/shopimages/");
+        registry.addResourceHandler("/tabulateimages/**")
+                .addResourceLocations("file:" + System.getProperty("user.dir") + "/tabulateimages/");
     }
 };

@@ -18,4 +18,8 @@ public interface ITabulateService {
     void delete(Integer tabulateId);
 
     List<Tabulate> getByTabulateName(String tabulateName);
+
+    List<Tabulate> getByShopId(Integer shopId);
+
+    Tabulate uploadTabulateImages(Integer tabulateId, String avatarPath);
 }
