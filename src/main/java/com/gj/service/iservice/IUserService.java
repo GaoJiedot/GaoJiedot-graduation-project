@@ -31,4 +31,11 @@ public interface IUserService  {
 
 
     User findById(Integer Id);
+
+
+    User updateAdmin(Integer userId, UserDto user);
+
+
+
+//    void deleteBatch(List<Integer> userIds);
 }

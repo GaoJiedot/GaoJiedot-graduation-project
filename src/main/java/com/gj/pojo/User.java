@@ -18,7 +18,7 @@ public class User {
     @Column(name = "user_name")
     private String userName;
     @Column(name = "user_type" ,columnDefinition= "int default 2")
-    private Integer userType;
+    private Integer userType=2;
     @Column(name = "email")
     private String email;
     @Column(name = "user_avatar")

@@ -16,7 +16,7 @@ public class Tabulate {
     @Column(name = "tabulate_tabs")
     private String tabulateTabs;
     @Column(name = "tabulate_type" ,columnDefinition = "int default 1")
-    private Integer tabulateType;
+    private Integer tabulateType =1;
     @Column(name = "tabulate_image")
     private String tabulateImage;
     @JoinColumn(name = "shop_id")

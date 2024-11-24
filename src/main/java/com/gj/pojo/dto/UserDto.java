@@ -9,6 +9,7 @@ public class UserDto {
     private Long userAccount;
     private String password;
     private String userName;
+    private Integer userType;
     private String email;
     private String userAvatar;
     private Integer shopId;

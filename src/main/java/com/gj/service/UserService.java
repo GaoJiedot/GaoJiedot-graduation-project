@@ -71,6 +71,38 @@ public class UserService implements IUserService {
         return userRepository.findById(Id).orElseThrow(() -> new IllegalArgumentException("用户未找到"));
     }
 
+    @Override
+    public User updateAdmin(Integer userId, UserDto user) {
+        User userPojo = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("用户未找到"));
+
+        if (user.getUserName() != null) {
+            userPojo.setUserName(user.getUserName());
+        }
+        if (user.getPassword() != null) {
+            userPojo.setPassword(user.getPassword());
+        }
+        if (user.getUserType() != null) {
+            userPojo.setUserType(user.getUserType());
+        }
+        return userRepository.save(userPojo);
+    }
+
+//    @Override
+//    public void deleteBatch(List<Integer> userIds) {
+//        if (userIds == null || userIds.isEmpty()) {
+//            throw new IllegalArgumentException("用户ID列表不能为空");
+//        }
+//
+//        // 确保不包含ID为1的用户
+//        if (userIds.contains(1)) {
+//            throw new IllegalArgumentException("不能删除管理员用户");
+//        }
+//
+//        // 批量删除用户
+//        userRepository.deleteBatchByIds(userIds);
+//    }
+
 
     @Override
     public User getUser(Long userAccount) {

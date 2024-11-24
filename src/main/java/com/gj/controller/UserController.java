@@ -127,4 +127,24 @@ public class UserController {
         return ResponseMessage.success(users);
     }
 
+    @PatchMapping("/update/{userId}")
+    public ResponseMessage updateAdmin(@PathVariable Integer userId, @RequestBody UserDto user) {
+        User userNew = userService.updateAdmin(userId, user);
+        return ResponseMessage.success(userNew);
+    }
+
+//    @DeleteMapping("/batch")
+//    public ResponseMessage deleteBatch(@RequestBody List<Integer> userIds) {
+//        // 检查是否包含ID为1的用户
+//        if (userIds.contains(1)) {
+//            return ResponseMessage.error("不能删除管理员用户");
+//        }
+//
+//        try {
+//            userService.deleteBatch(userIds);
+//            return ResponseMessage.success("批量删除成功");
+//        } catch (Exception e) {
+//            return ResponseMessage.error("删除失败: " + e.getMessage());
+//        }
+//    }
 }
