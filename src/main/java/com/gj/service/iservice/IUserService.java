@@ -35,6 +35,7 @@ public interface IUserService  {
 
     User updateAdmin(Integer userId, UserDto user);
 
+    List<User> findApplyStatus(Integer applyStatus);
 
 
 //    void deleteBatch(List<Integer> userIds);

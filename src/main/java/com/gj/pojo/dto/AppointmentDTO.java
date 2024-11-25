@@ -4,10 +4,10 @@ import lombok.Data;
 
 @Data
 public class AppointmentDTO {
-    private Integer id;
-    private String date;
-    private String timeSlot;
+
+    private Integer appointmentId;
+    private String appointmentDate;
+    private String appointmentTime;
     private String userPhone;
-    private String remark;
     private Integer shopId;
 }

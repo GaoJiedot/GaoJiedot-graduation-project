@@ -25,8 +25,8 @@ public class Shop {
     private String shopLogo;
     @Column(name = "shop_businesshours")
     private  String shopBusinessHours;
-    @Column(name = "shop_status")
-    private  Integer shopStatus;
+    @Column(name = "shop_status" ,columnDefinition = "int default 1")
+    private  Integer shopStatus =1;
     @Column(name = "shop_keeper")
     private  String shopKeeper;
 

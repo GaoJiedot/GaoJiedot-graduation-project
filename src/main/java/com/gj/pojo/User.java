@@ -25,6 +25,8 @@ public class User {
     private String userAvatar;
     @JoinColumn(name = "shop_id")
     private Integer shopId;
+    @Column(name = "apply_status",columnDefinition = "int default 0")
+    private Integer applyStatus=0;
     @Transient
     private String token;
 }

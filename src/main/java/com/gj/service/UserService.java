@@ -88,6 +88,11 @@ public class UserService implements IUserService {
         return userRepository.save(userPojo);
     }
 
+    @Override
+    public List<User> findApplyStatus(Integer applyStatus) {
+        return userRepository.findByApplyStatus(applyStatus);
+    }
+
 //    @Override
 //    public void deleteBatch(List<Integer> userIds) {
 //        if (userIds == null || userIds.isEmpty()) {
