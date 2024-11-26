@@ -14,4 +14,5 @@ public class ShopDto {
     private String shopPhone;
     private  String shopKeeper;
     private  String shopBusinessHours;
+
 }

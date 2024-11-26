@@ -27,5 +27,7 @@ public class WebConfigurer implements WebMvcConfigurer {
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/shopimages/");
         registry.addResourceHandler("/tabulateimages/**")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/tabulateimages/");
+        registry.addResourceHandler("/bg/**")
+                .addResourceLocations("file:" + System.getProperty("user.dir") + "/bg/");
     }
 };

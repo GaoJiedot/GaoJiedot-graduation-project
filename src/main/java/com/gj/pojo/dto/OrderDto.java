@@ -10,5 +10,8 @@ public class OrderDto {
     private Integer orderStatus;
     private String orderTabs;
     private String email;
+    private Integer shopId;
+    private String userPhone;
+    private String orderImage;
 
 }

@@ -23,6 +23,7 @@ public class UserService implements IUserService {
         return userRepository.save(userPojo);
     }
 
+
     public User login(UserDto user) {
         User existingUser = userRepository.findByUserAccount(user.getUserAccount());
         if (existingUser != null && existingUser.getPassword().equals(user.getPassword())) {
@@ -88,9 +89,16 @@ public class UserService implements IUserService {
         return userRepository.save(userPojo);
     }
 
+
     @Override
-    public List<User> findApplyStatus(Integer applyStatus) {
-        return userRepository.findByApplyStatus(applyStatus);
+    public User updateApply(Integer userId, UserDto user) {
+        User userPojo = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("用户未找到"));
+
+        userPojo.setUserType(user.getUserType());
+        userPojo.setShopId(user.getShopId());
+
+        return userRepository.save(userPojo);
     }
 
 //    @Override

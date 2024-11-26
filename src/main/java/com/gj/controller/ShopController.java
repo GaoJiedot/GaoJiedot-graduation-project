@@ -55,7 +55,7 @@ public class ShopController {
         Integer shopId = (Integer) params.get("shopId");
         Integer shopStatus = (Integer) params.get("shopStatus");
         shopService.updateShopStatus(shopId, shopStatus);
-        if (shopStatus == 1) {
+        if (shopStatus == 0) {
             return ResponseMessage.success("今天辛苦了");
         } else {
             return ResponseMessage.success("上班成功");
@@ -115,6 +115,7 @@ public class ShopController {
         return ResponseMessage.uploadsuccess("上传成功", baseUrl + avatarPath);
 
     }
+
 
 }
 

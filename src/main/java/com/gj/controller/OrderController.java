@@ -19,27 +19,36 @@ public class OrderController {
     @PostMapping
     public ResponseMessage add(@RequestBody OrderDto order) {
         Order orderNew = orderService.add(order);
-        return  ResponseMessage.success(orderNew);
+        return ResponseMessage.success(orderNew);
     }
+
     @GetMapping("/{orderId}")
     public ResponseMessage get(@PathVariable Integer orderId) {
         Order orderNew = orderService.get(orderId);
-        return  ResponseMessage.success(orderNew);
+        return ResponseMessage.success(orderNew);
     }
+
     @GetMapping("/status/{orderStatus}")
     public ResponseMessage getorderStatus(@PathVariable Integer orderStatus) {
         List<Order> orderNew = orderService.getStatus(orderStatus);
-        return  ResponseMessage.success(orderNew);
+        return ResponseMessage.success(orderNew);
     }
 
     @PutMapping
     public ResponseMessage update(@RequestBody OrderDto order) {
         Order orderNew = orderService.update(order);
-        return  ResponseMessage.success(orderNew);
+        return ResponseMessage.success(orderNew);
     }
+
     @DeleteMapping("/{orderId}")
     public ResponseMessage delete(@PathVariable Integer orderId) {
         orderService.delete(orderId);
         return ResponseMessage.success("删除成功");
+    }
+
+    @PatchMapping("/finishorder/{orderId}")
+    public ResponseMessage finishOrder(@PathVariable Integer orderId ,@RequestBody OrderDto order) {
+        Order orderNew = orderService.finishOrder(orderId,order);
+        return ResponseMessage.success(orderNew);
     }
 }

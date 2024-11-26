@@ -23,4 +23,5 @@ public interface IShopService {
     Shop uploadShopLogo(Integer shopId, String avatarPath);
 
     Shop uploadShopImages(Integer shopId, String avatarPath);
+
 }

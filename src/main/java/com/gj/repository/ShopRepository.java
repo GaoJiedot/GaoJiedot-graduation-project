@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface ShopRepository extends CrudRepository<Shop, Integer> {
     List<Shop> findByShopPhone(String shopPhone);
+
 }

@@ -1,7 +1,7 @@
 package com.gj.service;
 
 import com.gj.pojo.Appointment;
-import com.gj.pojo.dto.AppointmentDTO;
+import com.gj.pojo.dto.AppointmentDto;
 import com.gj.repository.AppointmentRepository;
 import com.gj.service.iservice.IAppointmentService;
 import org.springframework.beans.BeanUtils;
@@ -18,7 +18,7 @@ public class AppointmentService implements IAppointmentService {
     AppointmentRepository appointmentRepository;
 
     @Override
-    public Appointment saveAppointment(AppointmentDTO appointment) {
+    public Appointment saveAppointment(AppointmentDto appointment) {
         Appointment appointmentPojo = new Appointment();
         BeanUtils.copyProperties(appointment, appointmentPojo);
         return appointmentRepository.save(appointmentPojo);

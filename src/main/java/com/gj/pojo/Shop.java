@@ -30,5 +30,4 @@ public class Shop {
     @Column(name = "shop_keeper")
     private  String shopKeeper;
 
-
 }

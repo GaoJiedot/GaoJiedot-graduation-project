@@ -18,6 +18,12 @@ public class Order {
     private Integer orderStatus;
     @Column(name = "order_tabs")
     private String orderTabs;
+    @Column(name = "shop_id")
+    private Integer shopId;
+    @JoinColumn(name = "user_phone")
+    private String userPhone;
+    @Column(name = "order_image")
+    private String orderImage;
 
 
 

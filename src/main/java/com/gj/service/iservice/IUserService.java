@@ -8,7 +8,6 @@ import java.util.List;
 public interface IUserService  {
     User add(UserDto user);
 
-
     User getUser(Long userAccount);
 
     User update(UserDto user);
@@ -35,7 +34,7 @@ public interface IUserService  {
 
     User updateAdmin(Integer userId, UserDto user);
 
-    List<User> findApplyStatus(Integer applyStatus);
+    User updateApply(Integer userId, UserDto user);
 
 
 //    void deleteBatch(List<Integer> userIds);

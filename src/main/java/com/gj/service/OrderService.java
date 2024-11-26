@@ -44,4 +44,12 @@ public class OrderService implements IOrderService {
         return  orderRepository.findByOrderStatus(orderStatus);
     }
 
+    @Override
+    public Order finishOrder(Integer orderId, OrderDto order) {
+        Order orderPojo= orderRepository.findById(orderId).orElseThrow( ()-> new IllegalArgumentException("订单不存在"));
+        orderPojo.setOrderStatus(order.getOrderStatus());
+        return orderRepository.save(orderPojo);
+    }
+
+
 }

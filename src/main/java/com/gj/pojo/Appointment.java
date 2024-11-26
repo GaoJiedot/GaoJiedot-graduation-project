@@ -19,7 +19,7 @@ public class Appointment {
     private String appointmentTime;
     @Column(name = "user_phone")
     private String userPhone;
-    @Column(name = "shop_id")
+    @JoinColumn(name = "shop_id")
     private Integer shopId;
 
 }

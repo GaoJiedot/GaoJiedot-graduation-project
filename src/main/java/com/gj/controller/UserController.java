@@ -126,16 +126,16 @@ public class UserController {
         List<User> users = userService.findAll();
         return ResponseMessage.success(users);
     }
-    @GetMapping("/admin/{applyStatus}")
-    public ResponseMessage findApplyStatus(@PathVariable Integer applyStatus) {
-        List<User> users = userService.findApplyStatus(applyStatus);
-        return ResponseMessage.success(users);
-    }
 
     @PatchMapping("/update/{userId}")
     public ResponseMessage updateAdmin(@PathVariable Integer userId, @RequestBody UserDto user) {
         User userNew = userService.updateAdmin(userId, user);
         return ResponseMessage.success(userNew);
+    }
+    @PatchMapping("/updateApply/{userId}")
+    public ResponseMessage updateApply(@PathVariable Integer userId, @RequestBody UserDto user) {
+        User userNew = userService.updateApply(userId, user);
+    return ResponseMessage.success(userNew);
     }
 
 //    @DeleteMapping("/batch")

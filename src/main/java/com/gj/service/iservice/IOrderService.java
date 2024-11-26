@@ -17,4 +17,6 @@ public interface IOrderService {
 
 
     List<Order> getStatus(Integer orderStatus);
+
+    Order finishOrder(Integer orderId, OrderDto order);
 }

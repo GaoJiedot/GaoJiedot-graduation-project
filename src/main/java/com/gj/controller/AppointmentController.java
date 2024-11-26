@@ -1,7 +1,7 @@
 package com.gj.controller;
 
 import com.gj.pojo.Appointment;
-import com.gj.pojo.dto.AppointmentDTO;
+import com.gj.pojo.dto.AppointmentDto;
 import com.gj.pojo.responseMessage.ResponseMessage;
 import com.gj.service.iservice.IAppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class AppointmentController {
     IAppointmentService appointmentService;
 
     @PostMapping
-    public ResponseMessage createAppointment(@RequestBody AppointmentDTO appointment) {
+    public ResponseMessage createAppointment(@RequestBody AppointmentDto appointment) {
         Appointment appointmentNew = appointmentService.saveAppointment(appointment);
         return ResponseMessage.success(appointmentNew);
     }
