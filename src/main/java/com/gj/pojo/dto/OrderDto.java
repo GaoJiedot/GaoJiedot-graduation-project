@@ -13,5 +13,7 @@ public class OrderDto {
     private Integer shopId;
     private String userPhone;
     private String orderImage;
+    private Integer orderRating;
+    private String orderDate;
 
 }

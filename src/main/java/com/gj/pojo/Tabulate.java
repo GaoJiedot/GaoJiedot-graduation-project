@@ -19,7 +19,7 @@ public class Tabulate {
     private Integer tabulateType =1;
     @Column(name = "tabulate_image")
     private String tabulateImage;
-    @JoinColumn(name = "shop_id")
+    @Column(name = "shop_id")
     private Integer shopId;
     @Column(name = "tabulate_price")
     private Integer tabulatePrice;

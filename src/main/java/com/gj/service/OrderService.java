@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,7 +25,7 @@ public class OrderService implements IOrderService {
 
     @Override
     public Order get(Integer orderId) {
-        return orderRepository.findById(orderId).orElseThrow( ()-> new IllegalArgumentException("订单不存在"));
+        return orderRepository.findById(orderId).orElseThrow(() -> new IllegalArgumentException("订单不存在"));
     }
 
     @Override
@@ -41,15 +42,36 @@ public class OrderService implements IOrderService {
 
     @Override
     public List<Order> getStatus(Integer orderStatus) {
-        return  orderRepository.findByOrderStatus(orderStatus);
+        return orderRepository.findByOrderStatus(orderStatus);
     }
 
     @Override
     public Order finishOrder(Integer orderId, OrderDto order) {
-        Order orderPojo= orderRepository.findById(orderId).orElseThrow( ()-> new IllegalArgumentException("订单不存在"));
+        Order orderPojo = orderRepository.findById(orderId).orElseThrow(() -> new IllegalArgumentException("订单不存在"));
         orderPojo.setOrderStatus(order.getOrderStatus());
+        orderPojo.setOrderDate(order.getOrderDate());
         return orderRepository.save(orderPojo);
     }
 
+    @Override
+    public Order updaterating(Integer orderId, OrderDto order) {
+        Order orderPojo = orderRepository.findById(orderId).orElseThrow(() -> new IllegalArgumentException("订单不存在"));
+        orderPojo.setOrderRating(order.getOrderRating());
+        return orderRepository.save(orderPojo);
+    }
+
+    @Override
+    public List<Order> getShopRating(Integer shopId) {
+        List<Order> orderPojo = orderRepository.findByShopId(shopId);
+        List<Order> result = new ArrayList<>();
+
+        for (Order order : orderPojo) {
+            if (order.getOrderStatus() == 2) {
+                result.add(order);
+            }
+        }
+
+        return result;
+    }
 
 }

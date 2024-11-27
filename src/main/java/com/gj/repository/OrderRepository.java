@@ -10,4 +10,5 @@ import java.util.List;
 public interface OrderRepository extends CrudRepository<Order, Integer> {
     List<Order> findByOrderStatus(Integer orderStatus);
 
+    List<Order> findByShopId(Integer shopId);
 }

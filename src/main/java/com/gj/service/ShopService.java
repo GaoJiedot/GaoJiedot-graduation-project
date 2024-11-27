@@ -71,6 +71,12 @@ public class ShopService implements IShopService {
         return shopRepository.save(shop);
     }
 
+    @Override
+    public Shop updateRating(Integer shopId, ShopDto shop) {
+        Shop shopPojo = shopRepository.findById(shopId).orElseThrow(() -> new IllegalArgumentException("店铺不存在"));
+        shopPojo.setShopRating(shop.getShopRating());
+        return shopRepository.save(shopPojo);
+    }
 
 
 }

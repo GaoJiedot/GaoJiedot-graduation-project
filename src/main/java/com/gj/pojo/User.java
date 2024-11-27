@@ -23,7 +23,7 @@ public class User {
     private String email;
     @Column(name = "user_avatar")
     private String userAvatar;
-    @JoinColumn(name = "shop_id")
+    @Column(name = "shop_id")
     private Integer shopId;
     @Transient
     private String token;

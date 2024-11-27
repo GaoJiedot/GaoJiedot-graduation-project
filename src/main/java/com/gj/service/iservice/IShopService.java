@@ -24,4 +24,5 @@ public interface IShopService {
 
     Shop uploadShopImages(Integer shopId, String avatarPath);
 
+    Shop updateRating(Integer shopId, ShopDto shop);
 }

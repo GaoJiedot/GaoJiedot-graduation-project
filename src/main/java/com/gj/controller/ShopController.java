@@ -1,6 +1,7 @@
 package com.gj.controller;
 
 import com.gj.pojo.Shop;
+import com.gj.pojo.dto.OrderDto;
 import com.gj.pojo.dto.ShopDto;
 import com.gj.pojo.responseMessage.ResponseMessage;
 import com.gj.service.iservice.IShopService;
@@ -32,6 +33,7 @@ public class ShopController {
         Shop shopNew = shopService.get(shopId);
         return ResponseMessage.success(shopNew);
     }
+
     @GetMapping("/shop/{shopPhone}")
     public ResponseMessage getShopByPhone(@PathVariable String shopPhone) {
         List<Shop> shopNew = shopService.getShopByPhone(shopPhone);
@@ -40,7 +42,7 @@ public class ShopController {
 
     @GetMapping("/admin/all")
     public ResponseMessage getAll() {
-       List<Shop> shopNew = shopService.getAll();
+        List<Shop> shopNew = shopService.getAll();
         return ResponseMessage.success(shopNew);
     }
 
@@ -67,6 +69,7 @@ public class ShopController {
         shopService.delete(shopId);
         return ResponseMessage.success("删除成功");
     }
+
     @PostMapping("/uploadShopLogo/{shopId}")
     public ResponseMessage uploadShopLogo(@PathVariable Integer shopId, @RequestParam("file") MultipartFile file) {
         // 动态获取项目根目录
@@ -91,6 +94,7 @@ public class ShopController {
         return ResponseMessage.uploadsuccess("上传成功", baseUrl + avatarPath);
 
     }
+
     @PostMapping("/uploadShopImages/{shopId}")
     public ResponseMessage uploadShopImages(@PathVariable Integer shopId, @RequestParam("file") MultipartFile file) {
         // 动态获取项目根目录
@@ -116,6 +120,10 @@ public class ShopController {
 
     }
 
-
+    @PatchMapping("/updaterating/{shopId}")
+    public ResponseMessage updateRating(@PathVariable Integer shopId,@RequestBody ShopDto shop) {
+       Shop shopNew= shopService.updateRating(shopId,shop);
+       return ResponseMessage.success(shopNew);
+    }
 }
 

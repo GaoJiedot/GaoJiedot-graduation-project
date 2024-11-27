@@ -17,7 +17,7 @@ public class Temporary {
     private String shopPhone;
     @Column(name="shop_keeper")
     private String shopKeeper;
-    @JoinColumn(name="user_id")
+    @Column(name="user_id")
     private Integer userId;
 
 }

@@ -51,4 +51,16 @@ public class OrderController {
         Order orderNew = orderService.finishOrder(orderId,order);
         return ResponseMessage.success(orderNew);
     }
+    @PatchMapping("/rating/{orderId}")
+    public ResponseMessage ratingOrder(@PathVariable Integer orderId ,@RequestBody OrderDto order) {
+        Order orderNew = orderService.updaterating(orderId,order);
+        return ResponseMessage.success(orderNew);
+    }
+    @GetMapping("/getrating/{shopId}")
+    public ResponseMessage updateShopRating(@PathVariable Integer shopId) {
+        List<Order> orderNew = orderService.getShopRating(shopId);
+        return ResponseMessage.success(orderNew);
+
+
+    }
 }

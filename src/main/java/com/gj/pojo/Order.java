@@ -2,6 +2,7 @@ package com.gj.pojo;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
 @Table(name = "tb_order")
 @Entity
 @Data
@@ -20,11 +21,13 @@ public class Order {
     private String orderTabs;
     @Column(name = "shop_id")
     private Integer shopId;
-    @JoinColumn(name = "user_phone")
+    @Column(name = "user_phone")
     private String userPhone;
     @Column(name = "order_image")
     private String orderImage;
-
-
+    @Column(name = "order_rating")
+    private Integer orderRating;
+    @Column(name = "order_date")
+    private String orderDate;
 
 }

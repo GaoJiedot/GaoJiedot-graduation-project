@@ -15,7 +15,7 @@ public class Search {
     private String searchHistory;
     @Column(name = "search_hot")
     private String searchHot;
-    @JoinColumn(name = "user_id")
+    @Column(name = "user_id")
     private Integer userId;
 
 }

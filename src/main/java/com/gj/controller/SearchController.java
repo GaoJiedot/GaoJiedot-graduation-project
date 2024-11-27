@@ -1,25 +1,31 @@
 package com.gj.controller;
 
 import com.gj.pojo.Search;
+import com.gj.pojo.User;
 import com.gj.pojo.responseMessage.ResponseMessage;
 import com.gj.service.iservice.ISearchService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/search")
 public class SearchController {
     @Autowired
     ISearchService searchService;
+
     @GetMapping("/history/{userId}")
-    public ResponseMessage searchHistory(@PathVariable Integer userId){
-        Search search = new Search();
-        search.setUserId(userId);
-        Search result=searchService.searchHistory(search);
-         return ResponseMessage.success(result);
+    public ResponseMessage searchHistory(@PathVariable Integer userId) {
+        User user = new User();
+        user.setUserId(userId);
+        Search result = searchService.searchHistory(userId);
+        return ResponseMessage.success(result);
 
     }
+
+    @PostMapping("add/SearchHot")
+    public ResponseMessage addSearchHot(@RequestBody SearchDto search) {
+        Search searchNew=searchService.addSearchHot(search);
+        return ResponseMessage.success(searchNew);
+    }
+
 }
