@@ -13,16 +13,22 @@ public class SearchService implements ISearchService {
     @Autowired
     SearchRepository searchRepository;
 
-    @Override
-    public Search searchHistory(Search search) {
-        return searchRepository.getByUserId(search.getUserId());
-    }
 
     @Override
     public Search addSearchHot(SearchDto search) {
        Search searchPojo = new Search();
         BeanUtils.copyProperties(search,searchPojo);
         return searchRepository.save(searchPojo);
+    }
+
+    @Override
+    public Search searchHistory(Integer userId) {
+        return searchRepository.getByUserId(userId);
+    }
+
+    @Override
+    public void deleteSearchHot(Integer searchId) {
+        searchRepository.deleteById(searchId);
     }
 
 

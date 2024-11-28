@@ -27,14 +27,13 @@ public class UserService implements IUserService {
     public User login(UserDto user) {
         User existingUser = userRepository.findByUserAccount(user.getUserAccount());
         if (existingUser != null && existingUser.getPassword().equals(user.getPassword())) {
-           String token= JwtTokenUtils.genToken(existingUser.getUserId().toString(),existingUser.getPassword());
+            String token = JwtTokenUtils.genToken(existingUser.getUserId().toString(), existingUser.getPassword());
             existingUser.setToken(token);
             return existingUser;
-//            String token=JwtTokenUtils.generateToken(existingUser.getUserAccount().toString());
         }
-
         return null;
     }
+
 
     @Override
     public User updatePassword(UserDto user) {
@@ -57,7 +56,6 @@ public class UserService implements IUserService {
     public List<User> findAll() {
         return (List<User>) userRepository.findAll();
     }
-
 
 
     @Override
