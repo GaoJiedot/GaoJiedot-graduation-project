@@ -99,6 +99,11 @@ public class UserService implements IUserService {
         return userRepository.save(userPojo);
     }
 
+    @Override
+    public User getUserId(Integer shopId) {
+        return userRepository.findByShopId(shopId);
+    }
+
 //    @Override
 //    public void deleteBatch(List<Integer> userIds) {
 //        if (userIds == null || userIds.isEmpty()) {

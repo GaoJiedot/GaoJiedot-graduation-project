@@ -121,6 +121,11 @@ public class UserController {
         return ResponseMessage.success("删除成功");
     }
 
+    @GetMapping("/getcounterpartyId/{shopId}")
+    public ResponseMessage getUserId(@PathVariable Integer shopId) {
+        User userNew = userService.getUserId(shopId);
+        return ResponseMessage.success(userNew);
+    }
     @GetMapping("/admin")
     public ResponseMessage findall() {
         List<User> users = userService.findAll();

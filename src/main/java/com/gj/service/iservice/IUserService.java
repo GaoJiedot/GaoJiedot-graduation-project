@@ -36,6 +36,8 @@ public interface IUserService  {
 
     User updateApply(Integer userId, UserDto user);
 
+    User getUserId(Integer shopId);
+
 
 //    void deleteBatch(List<Integer> userIds);
 }
