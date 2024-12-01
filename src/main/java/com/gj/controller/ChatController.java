@@ -20,7 +20,7 @@
             return ResponseMessage.success(chatNew);
         }
         //获取聊天记录
-        @GetMapping("/getChat/{senderId}/{receiverId}")
+        @GetMapping("/getChat")
         public String getChat(Integer senderId,Integer receiverId){
             return  chatService.getChat(senderId,receiverId);
 

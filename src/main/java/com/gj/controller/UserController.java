@@ -121,7 +121,7 @@ public class UserController {
         return ResponseMessage.success("删除成功");
     }
 
-    @GetMapping("/getcounterpartyId/{shopId}")
+    @GetMapping("/getFriendId/{shopId}")
     public ResponseMessage getUserId(@PathVariable Integer shopId) {
         User userNew = userService.getUserId(shopId);
         return ResponseMessage.success(userNew);

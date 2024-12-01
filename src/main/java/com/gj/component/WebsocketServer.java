@@ -1,14 +1,17 @@
 package com.gj.component;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gj.pojo.Chat;
 import com.gj.pojo.ChatList;
 import com.gj.pojo.dto.ChatDto;
 import com.gj.service.ChatService;
 import com.gj.service.iservice.IChatListService;
+import jakarta.annotation.Resource;
 import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,27 +22,35 @@ import java.util.concurrent.ConcurrentHashMap;
 @ServerEndpoint("/websocket/{userId}")
 public class WebsocketServer {
     private static final Map<String, Session> ONLINE_SESSIONS = new ConcurrentHashMap<>();
+
+    // 使用静态变量存储服务实例
     private static ChatService chatService;
     private static IChatListService chatListService;
+
+    // 提供静态setter方法进行注入
+    @Autowired
+    public void setChatService(ChatService chatService) {
+        WebsocketServer.chatService = chatService;
+    }
+
+    @Autowired
+    public void setChatListService(IChatListService chatListService) {
+        WebsocketServer.chatListService = chatListService;
+    }
+
     private static final ObjectMapper objectMapper = new ObjectMapper();
-
-    // 注入所需的服务
-    public static void setChatService(ChatService service) {
-        WebsocketServer.chatService = service;
-    }
-
-    public static void setChatListService(IChatListService service) {
-        WebsocketServer.chatListService = service;
-    }
 
     @OnOpen
     public void onOpen(Session session, @PathParam("userId") String userId) {
         try {
+            if (chatListService == null) {
+                throw new IllegalStateException("chatListService has not been initialized");
+            }
+
             ONLINE_SESSIONS.put(userId, session);
             broadcastUserStatus(userId, "online");
 
-            // 获取并发送初始聊天列表
-            List<ChatList> chatList = chatListService.getChatList(Integer.parseInt(userId));  // 修改这里
+            List<ChatList> chatList = chatListService.getChatList(Integer.parseInt(userId));
             session.getBasicRemote().sendText(objectMapper.writeValueAsString(Map.of(
                     "type", "init",
                     "status", "success",
@@ -47,34 +58,68 @@ public class WebsocketServer {
             )));
         } catch (Exception e) {
             e.printStackTrace();
+            try {
+                session.getBasicRemote().sendText(objectMapper.writeValueAsString(Map.of(
+                        "type", "error",
+                        "message", "Failed to initialize chat: " + e.getMessage()
+                )));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
     @OnMessage
     public void onMessage(String message, Session session, @PathParam("userId") Integer userId) {
         try {
-            // 将消息转换为ChatDto对象
-            ChatDto chatDto = objectMapper.readValue(message, ChatDto.class);
+            JsonNode jsonNode = objectMapper.readTree(message);
+            JsonNode dataNode = jsonNode.get("data");
+
+            if (dataNode == null) {
+                session.getBasicRemote().sendText(objectMapper.writeValueAsString(Map.of(
+                        "type", "error",
+                        "message", "Message format error: missing 'data' field"
+                )));
+                return;
+            }
+
+            ChatDto chatDto = objectMapper.treeToValue(dataNode, ChatDto.class);
             chatDto.setSenderId(userId);
 
-            // 保存消息到数据库
             Chat savedChat = chatService.sendChat(chatDto);
 
-            // 更新发送者和接收者的聊天列表
+            // 更新发送者的聊天列表
             updateChatList(userId.toString());
-            updateChatList(chatDto.getReceiverId().toString());
 
-            // 发送消息给接收者
-            Session receiverSession = ONLINE_SESSIONS.get(chatDto.getReceiverId().toString());
+            // 更新并通知接收者
+            String receiverId = chatDto.getReceiverId().toString();
+            updateChatList(receiverId);
+
+            Session receiverSession = ONLINE_SESSIONS.get(receiverId);
             if (receiverSession != null && receiverSession.isOpen()) {
-                // 发送新消息
                 receiverSession.getBasicRemote().sendText(objectMapper.writeValueAsString(Map.of(
                         "type", "message",
                         "data", savedChat
                 )));
             }
+
+            // 发送成功响应给发送者
+            session.getBasicRemote().sendText(objectMapper.writeValueAsString(Map.of(
+                    "type", "messageStatus",
+                    "status", "success",
+                    "messageId", savedChat.getId()
+            )));
+
         } catch (Exception e) {
             e.printStackTrace();
+            try {
+                session.getBasicRemote().sendText(objectMapper.writeValueAsString(Map.of(
+                        "type", "error",
+                        "message", "Failed to process message: " + e.getMessage()
+                )));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
