@@ -8,11 +8,11 @@ import java.util.List;
 public interface IChatService {
 
 
-
-
-    String getChat(Integer senderId, Integer receiverId);
-
     Chat sendChat(ChatDto chat);
 
     List<Chat> getChatListByUserId(Integer userId);
+
+    List<Chat> getHistoryChat(Integer userId, Integer friendId);
+
+    Chat uploadShopLogo(Integer userId, String avatarPath);
 }

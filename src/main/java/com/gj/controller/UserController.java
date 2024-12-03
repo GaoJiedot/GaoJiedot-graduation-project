@@ -38,7 +38,7 @@ public class UserController {
         return ResponseMessage.error("用户名或密码错误");
     }
 
-    @GetMapping("/sendcode")
+    @GetMapping("/sendCode")
     public ResponseMessage sendCode(@RequestParam String email) {
         verificationCodeService.sendCode(email);
         return ResponseMessage.success("验证码已发送");

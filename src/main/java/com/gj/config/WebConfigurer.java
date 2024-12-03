@@ -22,15 +22,17 @@ public class WebConfigurer implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/avatar/**")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/avatar/");
-        registry.addResourceHandler("/shoplogo/**")
-                .addResourceLocations("file:" + System.getProperty("user.dir") + "/shoplogo/");
-        registry.addResourceHandler("/shopimages/**")
-                .addResourceLocations("file:" + System.getProperty("user.dir") + "/shopimages/");
-        registry.addResourceHandler("/tabulateimages/**")
-                .addResourceLocations("file:" + System.getProperty("user.dir") + "/tabulateimages/");
+        registry.addResourceHandler("/shopLogo/**")
+                .addResourceLocations("file:" + System.getProperty("user.dir") + "/shopLogo/");
+        registry.addResourceHandler("/shopImages/**")
+                .addResourceLocations("file:" + System.getProperty("user.dir") + "/shopImages/");
+        registry.addResourceHandler("/tabulateImages/**")
+                .addResourceLocations("file:" + System.getProperty("user.dir") + "/tabulateImages/");
         registry.addResourceHandler("/bg/**")
                 .addResourceLocations("file:" + System.getProperty("user.dir") + "/bg/");
-        registry.addResourceHandler("/shareimages/**")
-                .addResourceLocations("file:" + System.getProperty("user.dir") + "/shareimages/");
+        registry.addResourceHandler("/shareImages/**")
+                .addResourceLocations("file:" + System.getProperty("user.dir") + "/shareImages/");
+        registry.addResourceHandler("/chatImage/**")
+                .addResourceLocations("file:" + System.getProperty("user.dir") + "/chatImage/");
     }
 };

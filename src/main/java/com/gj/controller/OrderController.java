@@ -46,7 +46,7 @@ public class OrderController {
         return ResponseMessage.success("删除成功");
     }
 
-    @PatchMapping("/finishorder/{orderId}")
+    @PatchMapping("/finishOrder/{orderId}")
     public ResponseMessage finishOrder(@PathVariable Integer orderId ,@RequestBody OrderDto order) {
         Order orderNew = orderService.finishOrder(orderId,order);
         return ResponseMessage.success(orderNew);
@@ -56,7 +56,7 @@ public class OrderController {
         Order orderNew = orderService.updaterating(orderId,order);
         return ResponseMessage.success(orderNew);
     }
-    @GetMapping("/getrating/{shopId}")
+    @GetMapping("/getRating/{shopId}")
     public ResponseMessage updateShopRating(@PathVariable Integer shopId) {
         List<Order> orderNew = orderService.getShopRating(shopId);
         return ResponseMessage.success(orderNew);

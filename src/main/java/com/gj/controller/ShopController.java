@@ -1,7 +1,6 @@
 package com.gj.controller;
 
 import com.gj.pojo.Shop;
-import com.gj.pojo.dto.OrderDto;
 import com.gj.pojo.dto.ShopDto;
 import com.gj.pojo.responseMessage.ResponseMessage;
 import com.gj.service.iservice.IShopService;
@@ -73,7 +72,7 @@ public class ShopController {
     @PostMapping("/uploadShopLogo/{shopId}")
     public ResponseMessage uploadShopLogo(@PathVariable Integer shopId, @RequestParam("file") MultipartFile file) {
         // 动态获取项目根目录
-        String uploadDir = System.getProperty("user.dir") + "/shoplogo/";
+        String uploadDir = System.getProperty("user.dir") + "/shopLogo/";
         File uploadFolder = new File(uploadDir);
         if (!uploadFolder.exists()) {
             uploadFolder.mkdirs(); // 创建目录
@@ -89,7 +88,7 @@ public class ShopController {
         }
 
         String baseUrl = "http://localhost:8080"; // 替换为你的实际服务器地址
-        String avatarPath = "/shoplogo/" + fileName;
+        String avatarPath = "/shopLogo/" + fileName;
         shopService.uploadShopLogo(shopId, avatarPath); // 更新数据库
         return ResponseMessage.uploadsuccess("上传成功", baseUrl + avatarPath);
 
@@ -98,7 +97,7 @@ public class ShopController {
     @PostMapping("/uploadShopImages/{shopId}")
     public ResponseMessage uploadShopImages(@PathVariable Integer shopId, @RequestParam("file") MultipartFile file) {
         // 动态获取项目根目录
-        String uploadDir = System.getProperty("user.dir") + "/shopimages/";
+        String uploadDir = System.getProperty("user.dir") + "/shopImages/";
         File uploadFolder = new File(uploadDir);
         if (!uploadFolder.exists()) {
             uploadFolder.mkdirs(); // 创建目录
@@ -114,16 +113,16 @@ public class ShopController {
         }
 
         String baseUrl = "http://localhost:8080"; // 替换为你的实际服务器地址
-        String avatarPath = "/shopimages/" + fileName;
+        String avatarPath = "/shopImages/" + fileName;
         shopService.uploadShopImages(shopId, avatarPath); // 更新数据库
         return ResponseMessage.uploadsuccess("上传成功", baseUrl + avatarPath);
 
     }
 
-    @PatchMapping("/updaterating/{shopId}")
-    public ResponseMessage updateRating(@PathVariable Integer shopId,@RequestBody ShopDto shop) {
-       Shop shopNew= shopService.updateRating(shopId,shop);
-       return ResponseMessage.success(shopNew);
+    @PatchMapping("/updateRating/{shopId}")
+    public ResponseMessage updateRating(@PathVariable Integer shopId, @RequestBody ShopDto shop) {
+        Shop shopNew = shopService.updateRating(shopId, shop);
+        return ResponseMessage.success(shopNew);
     }
 }
 

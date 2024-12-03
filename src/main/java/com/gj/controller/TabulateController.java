@@ -68,7 +68,7 @@ public class TabulateController {
     @PostMapping("/uploadTabulateImages/{tabulateId}")
     public ResponseMessage uploadTabulateImages(@PathVariable Integer tabulateId, @RequestParam("file") MultipartFile file) {
         // 动态获取项目根目录
-        String uploadDir = System.getProperty("user.dir") + "/tabulateimages/";
+        String uploadDir = System.getProperty("user.dir") + "/tabulateImages/";
         File uploadFolder = new File(uploadDir);
         if (!uploadFolder.exists()) {
             uploadFolder.mkdirs(); // 创建目录
@@ -84,7 +84,7 @@ public class TabulateController {
         }
 
         String baseUrl = "http://localhost:8080"; // 替换为你的实际服务器地址
-        String avatarPath = "/tabulateimages/" + fileName;
+        String avatarPath = "/tabulateImages/" + fileName;
         tabulateService.uploadTabulateImages(tabulateId, avatarPath); // 更新数据库
         return ResponseMessage.uploadsuccess("上传成功", baseUrl + avatarPath);
 

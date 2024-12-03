@@ -19,22 +19,22 @@ public class ChatService implements IChatService {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @Override
-    public String getChat(Integer senderId, Integer receiverId) {
-        try {
-            List<Chat> chatHistory = chatRepository.findChatHistory(senderId, receiverId);
-            return objectMapper.writeValueAsString(chatHistory);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "[]";
-        }
-    }
 
     @Override
     public Chat sendChat(ChatDto chatDto) {
         Chat chat = new Chat();
+        chat.setUserId(chatDto.getUserId());
+        chat.setUserName(chatDto.getUserName());
+        chat.setUserAvatar(chatDto.getUserAvatar());
+        chat.setFriendId(chatDto.getFriendId());
+        chat.setFriendName(chatDto.getFriendName());
+        chat.setFriendAvatar(chatDto.getFriendAvatar());
+        chat.setSenderId(chatDto.getSenderId());
+        chat.setContent(chatDto.getContent());
+        chat.setType(chatDto.getType());
         chat.setSendTime(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
         chat.setReadStatus(0);
+
 
         return chatRepository.save(chat);
     }
@@ -43,5 +43,16 @@ public class ChatService implements IChatService {
     public List<Chat> getChatListByUserId(Integer userId) {
 
         return chatRepository.getChatListByUserId(userId);
+    }
+
+    @Override
+    public List<Chat> getHistoryChat(Integer userId, Integer friendId) {
+        return chatRepository.findByUserIdAndFriendId(friendId, userId);
+    }
+
+    @Override
+    public Chat uploadShopLogo(Integer userId, String avatarPath) {
+        Chat chat = new Chat();
+        return chatRepository.save(chat);
     }
 }

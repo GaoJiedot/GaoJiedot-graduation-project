@@ -7,9 +7,9 @@ import lombok.Data;
 public class ChatListDto {
 
     private Integer userId;
-    private String username;
+    private String userName;
     private String userAvatar;
     private Integer friendId;
-    private String friendname;
+    private String friendName;
     private String friendAvatar;
 }
