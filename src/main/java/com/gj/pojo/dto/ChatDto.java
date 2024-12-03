@@ -18,7 +18,7 @@ public class ChatDto {
     private String sendTime;
     private Integer readStatus;
     private String type;
-    private String fileName;
+
 
 
 

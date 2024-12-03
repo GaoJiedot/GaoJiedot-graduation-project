@@ -33,7 +33,6 @@ public class Chat {
     private Integer readStatus;
     @Column(name = "type")
     private String type;
-    @Column(name = "file_name")
-    private String fileName;
+
 
 }
