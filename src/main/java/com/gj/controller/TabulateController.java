@@ -5,6 +5,7 @@ import com.gj.pojo.dto.TabulateDto;
 import com.gj.pojo.responseMessage.ResponseMessage;
 import com.gj.service.iservice.ITabulateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,10 +34,18 @@ public class TabulateController {
     }
 
     @GetMapping("/type/{tabulateType}")
-    public ResponseMessage getByType(@PathVariable Integer tabulateType) {
-        List<Tabulate> tabulateNew = tabulateService.getByType(tabulateType);
-        return ResponseMessage.success(tabulateNew);
+    public ResponseMessage getByType(
+            @PathVariable Integer tabulateType,
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "5") int pageSize) {
+        Page<Tabulate> tabulatePage = tabulateService.getByTypeWithPagination(
+                tabulateType,
+                page - 1,
+                pageSize
+        );
+        return ResponseMessage.success(tabulatePage);
     }
+
 
     @GetMapping("/search/{tabulateName}")
     public ResponseMessage getByTabulateName(@PathVariable String tabulateName) {

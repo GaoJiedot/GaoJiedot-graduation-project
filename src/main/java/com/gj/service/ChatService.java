@@ -29,9 +29,9 @@ public class ChatService implements IChatService {
         chat.setFriendId(chatDto.getFriendId());
         chat.setFriendName(chatDto.getFriendName());
         chat.setFriendAvatar(chatDto.getFriendAvatar());
-        chat.setSenderId(chatDto.getSenderId());
         chat.setContent(chatDto.getContent());
         chat.setType(chatDto.getType());
+        chat.setSenderId(chatDto.getSenderId());
         chat.setSendTime(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
         chat.setReadStatus(0);
 
@@ -51,8 +51,18 @@ public class ChatService implements IChatService {
     }
 
     @Override
-    public Chat uploadShopLogo(Integer userId, String avatarPath) {
+    public Chat uploadChatImage(Integer userId, String avatarPath) {
         Chat chat = new Chat();
         return chatRepository.save(chat);
     }
+
+    @Override
+    public List<Chat> clearUnread(Integer userId, Integer friendId) {
+        List<Chat> chat = chatRepository.findByUserIdAndFriendId(friendId, userId);
+        chat.forEach(c -> c.setReadStatus(1));
+        return chatRepository.saveAll(chat);
+
+    }
+
+
 }

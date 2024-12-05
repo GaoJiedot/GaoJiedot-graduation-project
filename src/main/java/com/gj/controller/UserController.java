@@ -6,12 +6,16 @@ import com.gj.pojo.responseMessage.ResponseMessage;
 import com.gj.service.VerificationCodeService;
 import com.gj.service.iservice.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -126,10 +130,25 @@ public class UserController {
         User userNew = userService.getUserId(shopId);
         return ResponseMessage.success(userNew);
     }
+
     @GetMapping("/admin")
-    public ResponseMessage findall() {
-        List<User> users = userService.findAll();
-        return ResponseMessage.success(users);
+    public ResponseMessage findall(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "5") int pageSize) {
+        // 创建分页对象 注意这里不需要减1，因为 PageRequest.of 参数从0开始
+        PageRequest pageRequest = PageRequest.of(page - 1, pageSize);
+
+        // 获取分页数据
+        Page<User> userPage = userService.findAll(pageRequest);
+
+        // 构建返回的数据结构
+        Map<String, Object> result = new HashMap<>();
+        result.put("records", userPage.getContent());
+        result.put("current", page);
+        result.put("pages", userPage.getTotalPages());
+        result.put("total", userPage.getTotalElements());
+
+        return ResponseMessage.success(result);
     }
 
     @PatchMapping("/update/{userId}")
@@ -137,24 +156,17 @@ public class UserController {
         User userNew = userService.updateAdmin(userId, user);
         return ResponseMessage.success(userNew);
     }
+
     @PatchMapping("/updateApply/{userId}")
     public ResponseMessage updateApply(@PathVariable Integer userId, @RequestBody UserDto user) {
         User userNew = userService.updateApply(userId, user);
-    return ResponseMessage.success(userNew);
+        return ResponseMessage.success(userNew);
     }
 
-//    @DeleteMapping("/batch")
-//    public ResponseMessage deleteBatch(@RequestBody List<Integer> userIds) {
-//        // 检查是否包含ID为1的用户
-//        if (userIds.contains(1)) {
-//            return ResponseMessage.error("不能删除管理员用户");
-//        }
-//
-//        try {
-//            userService.deleteBatch(userIds);
-//            return ResponseMessage.success("批量删除成功");
-//        } catch (Exception e) {
-//            return ResponseMessage.error("删除失败: " + e.getMessage());
-//        }
-//    }
+    @DeleteMapping("/batch")
+    public ResponseMessage deleteBatch(@RequestBody List<Integer> userId) {
+        userService.deleteBatch(userId);
+        return ResponseMessage.success("批量删除成功");
+
+    }
 }

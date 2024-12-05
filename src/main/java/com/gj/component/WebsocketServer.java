@@ -1,5 +1,6 @@
 package com.gj.component;
 
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gj.pojo.Chat;
@@ -83,7 +84,7 @@ public class WebsocketServer {
             }
 
             String type = jsonNode.get("type").asText();
-            JsonNode dataNode = jsonNode.get("data");
+                JsonNode dataNode = jsonNode.get("data");
 
             // 处理初始化消息
             if ("init".equals(type)) {

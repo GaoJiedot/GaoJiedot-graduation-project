@@ -14,5 +14,10 @@ public interface IChatService {
 
     List<Chat> getHistoryChat(Integer userId, Integer friendId);
 
-    Chat uploadShopLogo(Integer userId, String avatarPath);
+
+
+    Chat uploadChatImage(Integer userId, String avatarPath);
+
+
+    List<Chat> clearUnread(Integer userId, Integer friendId);
 }

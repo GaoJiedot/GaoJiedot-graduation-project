@@ -7,6 +7,9 @@ import com.gj.repository.UserRepository;
 import com.gj.service.iservice.IUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +26,7 @@ public class UserService implements IUserService {
         return userRepository.save(userPojo);
     }
 
-
+    @Override
     public User login(UserDto user) {
         User existingUser = userRepository.findByUserAccount(user.getUserAccount());
         if (existingUser != null && existingUser.getPassword().equals(user.getPassword())) {
@@ -52,10 +55,6 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
-    @Override
-    public List<User> findAll() {
-        return (List<User>) userRepository.findAll();
-    }
 
 
     @Override
@@ -104,20 +103,15 @@ public class UserService implements IUserService {
         return userRepository.findByShopId(shopId);
     }
 
-//    @Override
-//    public void deleteBatch(List<Integer> userIds) {
-//        if (userIds == null || userIds.isEmpty()) {
-//            throw new IllegalArgumentException("用户ID列表不能为空");
-//        }
-//
-//        // 确保不包含ID为1的用户
-//        if (userIds.contains(1)) {
-//            throw new IllegalArgumentException("不能删除管理员用户");
-//        }
-//
-//        // 批量删除用户
-//        userRepository.deleteBatchByIds(userIds);
-//    }
+    @Override
+    public void deleteBatch(List<Integer> userId) {
+        userRepository.deleteAllById(userId);
+    }
+
+    @Override
+    public Page<User> findAll(PageRequest pageRequest) {
+        return  userRepository.findAll(pageRequest);
+    }
 
 
     @Override

@@ -11,7 +11,7 @@ import java.util.List;
 public interface ChatRepository extends JpaRepository<Chat, Integer> {
 
 
-
+    @Query(value = "SELECT * FROM `tb_chat` WHERE user_id OR friend_id ", nativeQuery = true)
     List<Chat> getChatListByUserId(Integer userId);
 
     @Query(value = "SELECT * FROM `tb_chat` WHERE (user_id =?1 AND friend_id =?2) OR (user_id =?2 AND friend_id =?1)", nativeQuery = true)

@@ -2,6 +2,9 @@ package com.gj.service.iservice;
 
 import com.gj.pojo.User;
 import com.gj.pojo.dto.UserDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+
 
 import java.util.List;
 
@@ -21,11 +24,6 @@ public interface IUserService  {
 
     User updateAvatar(Integer userId, String avatarPath);
 
-    List<User> findAll();
-
-
-
-
     User get(Integer userId);
 
 
@@ -39,5 +37,8 @@ public interface IUserService  {
     User getUserId(Integer shopId);
 
 
-//    void deleteBatch(List<Integer> userIds);
+    void deleteBatch(List<Integer> userId);
+
+
+    Page<User> findAll(PageRequest pageRequest);
 }

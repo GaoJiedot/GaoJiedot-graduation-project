@@ -2,6 +2,7 @@ package com.gj.service.iservice;
 
 import com.gj.pojo.Tabulate;
 import com.gj.pojo.dto.TabulateDto;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public interface ITabulateService {
 
     Tabulate get(Integer tabulateId);
 
-    List<Tabulate> getByType(Integer tabulateType);
+
 
     Tabulate update(TabulateDto tabulate);
 
@@ -22,4 +23,6 @@ public interface ITabulateService {
     List<Tabulate> getByShopId(Integer shopId);
 
     Tabulate uploadTabulateImages(Integer tabulateId, String avatarPath);
+
+    Page<Tabulate> getByTypeWithPagination(Integer tabulateType, int page, int pageSize);
 }
